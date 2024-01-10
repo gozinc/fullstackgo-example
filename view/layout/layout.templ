@@ -1,0 +1,49 @@
+package layout
+
+import "strconv"
+
+const zincGithubURL = "https://github.com/gozinc/zinc"
+
+templ Layout(count int) {
+	<div class="h-full flex flex-col font-['virgil'] p-4">
+		<div class=" text-center">
+			<p class="text-[5rem]">ZINC</p>
+			<p class="relative text-blue-400 text-2xl">
+				Fullstack <span class="line-through decoration-zinc-500">framework</span> tooling for GoLang
+				<img
+					src="https://i.imgur.com/48WemjB.png"
+					alt="a pic of arrow pointing to above link"
+					class="absolute top-8 left-[45%]"
+				/>
+			</p>
+		</div>
+		<div class="flex-1 flex items-center justify-center">
+			@CountsButton(count)
+		</div>
+		<div class="text-center text-2xl pb-8 md:pb-16">
+			<p><span class="font-bold">Github</span>: <a href={ templ.URL(zincGithubURL) } class="text-blue-600 hover:underline decoration-pink-500">{ zincGithubURL }</a></p>
+		</div>
+		<div class="flex items-center justify-around p-8 font-xl">
+			<a target="_blank" href={ templ.URL("https://htmx.org/") }>
+				<img src="https://i.imgur.com/BHqz9o9.png" class="h-16 md:h-32" alt="htmx logo"/>
+			</a>
+			<a target="_blank" href={ templ.URL("https://templ.guide/") }>
+				<img src="https://i.imgur.com/yZMjqRD.png" class="h-16 md:h-32" alt="templ logo"/>
+			</a>
+			<a target="_blank" href={ templ.URL("https://echo.labstack.com/") }>
+				<img src="https://i.imgur.com/nODqNAJ.png" class="h-16 md:h-32" alt="echo logo"/>
+			</a>
+		</div>
+	</div>
+}
+
+templ CountsButton(count int) {
+	<button
+		hx-post="/"
+		hx-target="this"
+		hx-swap="outerHTML"
+		class="bg-black text-white px-4 py-2 rounded text-2xl"
+	>
+		Count <span>{ strconv.Itoa(count) }</span>
+	</button>
+}
