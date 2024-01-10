@@ -560,6 +560,10 @@ video {
   top: 2rem;
 }
 
+.z-\[-10\] {
+  z-index: -10;
+}
+
 .flex {
   display: flex;
 }

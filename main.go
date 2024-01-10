@@ -21,6 +21,7 @@ func main() {
 
 	echoServer.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"https://i.imgur.com"},
+		AllowMethods: []string{"GET"},
 	}))
 
 	echoServer.Static("/static/", "./static")
@@ -40,5 +41,5 @@ func main() {
 		return layout.CountsButton(global.Count).Render(ctx, c.Response().Writer)
 	})
 
-	echoServer.Logger.Fatal(echoServer.Start(":3000"))
+	echoServer.Logger.Fatal(echoServer.Start("127.0.0.1:3000"))
 }
