@@ -8,6 +8,7 @@ templ Layout(count int) {
 	<div class="h-full flex flex-col font-['virgil'] p-4">
 		<div class=" text-center">
 			<p class="text-[5rem]">ZINC</p>
+			<p>from @<span class="text-pink-500">{ ctx.Value("host").(string) }</span></p>
 			<p class="relative text-blue-400 text-2xl">
 				Fullstack <span class="line-through decoration-zinc-500">framework</span> tooling for GoLang
 				<img

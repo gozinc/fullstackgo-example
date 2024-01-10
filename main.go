@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fullstackgo/view"
 	"fullstackgo/view/layout"
 
@@ -25,12 +26,18 @@ func main() {
 	echoServer.Static("/static/", "./static")
 
 	echoServer.GET("/", func(c echo.Context) error {
-		return view.Index(global.Count).Render(c.Request().Context(), c.Response().Writer)
+		ctx := c.Request().Context()
+		ctx = context.WithValue(ctx, "host", c.Request().Host)
+
+		return view.Index(global.Count).Render(ctx, c.Response().Writer)
 	})
 
 	echoServer.POST("/", func(c echo.Context) error {
+		ctx := c.Request().Context()
+
 		global.Count += 1
-		return layout.CountsButton(global.Count).Render(c.Request().Context(), c.Response().Writer)
+
+		return layout.CountsButton(global.Count).Render(ctx, c.Response().Writer)
 	})
 
 	echoServer.Logger.Fatal(echoServer.Start(":3000"))
